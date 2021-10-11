@@ -1,13 +1,40 @@
 package com.example.Eccomerce.models;
 
+import javax.persistence.*;
 import java.util.Date;
 
+
+
+@Entity
+@Table(name="orders")
 public class Order {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String numero;
     private Date fechaCreacion;
     private Date fechaRecibida;
     private double total;
+    @ManyToOne
+    private Usuario usuario;
+    @OneToOne(mappedBy = "order")
+    private detalleOrder detalle;
+
+    public detalleOrder getDetalle() {
+        return detalle;
+    }
+
+    public void setDetalle(detalleOrder detalle) {
+        this.detalle = detalle;
+    }
+
+    public Usuario getUsuario() {
+        return usuario;
+    }
+
+    public void setUsuario(Usuario usuario) {
+        this.usuario = usuario;
+    }
 
     public Order() {
     }

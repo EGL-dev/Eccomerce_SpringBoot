@@ -1,12 +1,34 @@
 package com.example.Eccomerce.models;
 
+
+import org.w3c.dom.stylesheets.LinkStyle;
+
+import javax.persistence.*;
+import java.util.List;
+
+@Entity
+@Table(name="usuarios")
 public class Usuario {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String Nombre ;
     private String username;
     private String email;
     private String password;
     private String direccion;
+    @OneToMany(mappedBy = "usuario")
+    private List<Producto> productos;
+    @OneToMany(mappedBy = "usuario")
+    private List<Order> orders;
+
+    public List<Producto> getProductos() {
+        return productos;
+    }
+
+    public void setProductos(List<Producto> productos) {
+        this.productos = productos;
+    }
 
     public Usuario() {
     }

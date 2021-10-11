@@ -1,11 +1,38 @@
 package com.example.Eccomerce.models;
 
+import javax.persistence.*;
+
+@Entity
+@Table(name = "detaller")
 public class detalleOrder {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String nombre;
     private double cantidad;
     private double precio;
     private double total;
+    @OneToOne
+    private Order order;
+
+    public Order getOrder() {
+        return order;
+    }
+
+    public void setOrder(Order order) {
+        this.order = order;
+    }
+
+    public Producto getProducto() {
+        return producto;
+    }
+
+    public void setProducto(Producto producto) {
+        this.producto = producto;
+    }
+
+    @OneToOne
+    private Producto producto;
 
     public detalleOrder() {
     }
